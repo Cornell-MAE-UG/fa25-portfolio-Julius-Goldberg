@@ -1,6 +1,6 @@
 ---
 layout: default
-title: <Your Name> - Curriculum Vitae
+title: Julius Goldberg - Curriculum Vitae
 permalink: /cv/
 ---
 ## Curriculum Vitae
@@ -20,11 +20,11 @@ Aspiring engineering student with a strong foundation in.... Passionate about ..
 #### Education
 - **Cornell University**  
   *Bachelor of Science in Mechanical and Aerospace Engineering*  
-  GPA: 3.8/4.0 | Graduation: Month, Year
+  GPA: 3.9/4.0 | Graduation: May, 2026
 
 - **[High School Name]**  
   *High School Diploma*  
-  Graduation: [Month, Year]
+  Graduation: June, 2022
 
 ---
 

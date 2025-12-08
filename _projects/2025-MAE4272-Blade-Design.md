@@ -1,0 +1,65 @@
+---
+layout: project
+title: Blade Design
+description: Wind turbine blade design and development
+technologies: [MATLAB Modelling, Test Development, Data Processing]
+image: /assets/images/function-graph.png # Replace
+---
+
+Background: As part of MAE 4272, I was put on a team of three and asked to develop a wind turbine blade to extract the maximum energy from the flow in a wind tunnel. 
+
+Design Objectives: Our goal was to maximize efficiency, which we defined as the power extracted to the power available from the oncoming wind. The achievable threshold was limited theoretically by the Betz Limit, which defines a theoretical efficiency of about 60%, and then practically by the average industrial three blade turbine efficiency of ~45%.
+
+
+<div align="center">
+
+$$
+P = \omega \tau
+$$
+
+$$
+C_p = \frac{P}{P_{\text{wind}}}
+$$
+
+$$
+P_{\text{wind}} = \tfrac{1}{2}\,\rho A u^3
+$$
+
+</div>
+
+We had structural constraints from the wind distribution limits, geometric constraints from the wind tunnel, and torque limits from the torque brake.
+
+Assumptions:
+| Aerodynamic | Structural | Numerical |
+|-------------|------------|-----------|
+| Steady flow | Torsion, axial stress, vibrations, and other dynamics neglected | Discretized span |
+| Fixed induction factor ‘a’ (actual a → f(Ω, r)) | 3D printed material considered homogeneous & isotropic | Nearest-neighbor C<sub>L</sub>/C<sub>D</sub> lookup (no interpolation or extrapolation) |
+| 2D section lift and drag (neglected radial flow) | Modelled as fixed at the root – actual mounting geometry ignored | Rootfinding function is convex |
+| No wingtip effects or interference from walls | Moment of inertia taken as pitched rectangles |   |
+
+Design: We began by selecting an airfoil based on the estimated Reynold's number and maximized the coefficient of lift to drag (while maintaining a reasonable profile for structure). Then, we set the pitch and twist of the blade so that at a tip speed ratio of 5, the angle of attack everywhere maximized the coeffient of lift to drag ratio. We chose to do this rather than setting the pitch purely to maximize torque because we wanted the blade to be optimal over a broader distribution of wind speeds and for that point to be easily calculated. Finally, we ensured that the blade could survive the maximum expected wind speed. The model efficiency was impossibly high, but the shape looked approximately correct and the efficiency was maximized around a tip speed ratio of five.
+
+> <div align="center">
+> <strong>Hypothesis</strong><br>
+> Based on our model, peak efficiency will occur for our blade around a TSR of 5.  
+> The efficiency of the model and theoretical power generated are unreasonable  
+> owing to various simplifying assumptions, but based on the efficiency of  
+> typical blades of this size and rotation rate, we anticipate a maximum  
+> efficiency of about 45%.
+> </div>
+
+Testing: We calibrated sensors and organized our sampling so that we could develop power curves for several windspeeds. At higher desired wind speeds, we had to iteratively increase the torque and windspeed so that we didn't exceed the maximum rpm set by the torque brake.
+
+Results: 
+> <div align="center">
+> <strong>Results</strong><br>
+> The shape of the power curves is very similar to what we expected and the peak of each power curves 
+> occurs exactly at a tip speed ratio of five. The efficiency rose as we increased the oncoming wind, 
+> which was surprising considering that the assumptions for steadiness probably became less valid 
+> at higher wind speeds. This may be attributed to intrinsic torques which became a smaller f
+> raction of the overall torque as the rotation rate and torque brake torque increase. 
+> </div>
+
+There is also an interesting kink visible in the power curves at 2300rpm which corresponded to a significant increase in noise from the blades. We're confident this corresponds to a vibrational mode of the blades.
+
+Reflections: Blade design is iterative, but we only had one shot to experiment physically on our blade. Given more time, we would go back and refine the model with our results, ensuring that the rpm values are correct for different torques. This might demand questioning the assumptions such as the constant induction factor. It would also be helpful to model the hub for structural failure, including it in a simulation tool such as ANSYS for fluid flow and stress. In terms of the testing, it might be helpful to use a stronger torque brake so that we can extract more power from higher wind speeds. 
